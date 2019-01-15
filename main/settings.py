@@ -25,7 +25,7 @@ SECRET_KEY = '991zgt#ywsetyql3b@y+i&1@_)vyz(iyut40#)bc&b7f(e2)yw'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [u'hallrizonX.pythonanywhere.com']
+ALLOWED_HOSTS = [u'hallrizonX.pythonanywhere.com', '127.0.0.1']
 
 
 # Application definition
@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'office',
+    'authorization',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +56,7 @@ ROOT_URLCONF = 'main.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -103,7 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'uk-uk'
 
 TIME_ZONE = 'UTC'
 
@@ -113,15 +115,21 @@ USE_L10N = True
 
 USE_TZ = True
 
+SITE = 1
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'
 
 # default static files settings for PythonAnywhere.
 # see https://help.pythonanywhere.com/pages/DjangoStaticFiles for more info
-MEDIA_ROOT = u'/home/hallrizonX/main/media'
-MEDIA_URL = '/media/'
-STATIC_ROOT = u'/home/hallrizonX/main/static'
+#MEDIA_ROOT = u'/home/hallrizonX/main/media'
+#MEDIA_URL = '/media/'
+#STATIC_ROOT = u'/home/hallrizonX/main/static'
+#STATIC_URL = '/static/'
+
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
