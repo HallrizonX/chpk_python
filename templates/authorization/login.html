@@ -1,0 +1,13 @@
+{% extends 'authorization/base.html'%}
+{% load static %}
+
+{% block content %}
+    <h1>Login</h1>
+    <form method="post">
+        {% csrf_token %}
+        <p>{{ msg }}</p>
+        <input type="text" name="username" placeholder="login">
+        <input type="password" name="password" placeholder="***">
+        <button type="submit"> Auth </button>
+    </form>
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends 'authorization/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Register</h1>
+    <form method="post">
+        {% csrf_token %}
+        <p>{{ msg }}</p>
+        <input type="text" name="username" placeholder="login">
+        <input type="password" name="password" placeholder="***">
+        <input type="email" name="email" placeholder="email@gmail.com">
+        <input type="text" name="name" placeholder="Ім'я">
+        <input type="text" name="surname" placeholder="Прізвище">
+        <input type="text" name="last_name" placeholder="По батькові">
+        <button type="submit"> Auth </button>
+    </form>
+{% endblock content %}

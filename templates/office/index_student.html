@@ -1,0 +1,13 @@
+{% extends 'office/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Office Student</h1>
+    <p>Login - {{ user.user.username }}</p>
+    <p>Email - {{ user.user.email }}</p>
+    <p>Name - {{ user.name }}</p>
+    <p>Surname - {{ user.surname }}</p>
+    <p>Last name - {{ user.last_name }}</p>
+    <p>Type - {{ user.access_profile }}</p>
+    <p>Type - {{ user.birth_date }}</p>
+{% endblock content %}
