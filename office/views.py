@@ -3,7 +3,7 @@ from authorization.models import Profile
 from django.shortcuts import get_object_or_404
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from .models import *
 
 class OfficeIndex(LoginRequiredMixin, View):
     login_url = '/auth/login/'
@@ -13,9 +13,15 @@ class OfficeIndex(LoginRequiredMixin, View):
         user = get_object_or_404(Profile, user=request.user)
 
         if user.access_profile == "student":
-            return render(request, 'office/index_student.html', context={"user": user})
+            return render(request, 'office/student/index_student.html', context={"user": user})
         elif user.access_profile == "teacher":
-            return render(request, 'office/index_student.html', context={"user": user})
+
+            teacher = Teacher.objects.get(profile__user=request.user)
+            return render(request, 'office/teacher/index_teacher.html', context={
+                "user": user,
+                "subjects": teacher.subjects,
+                "files": teacher.files.all()
+            })
 
         return render(request, 'office/not_access.html', context={})
 
