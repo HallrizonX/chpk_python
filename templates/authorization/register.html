@@ -2,16 +2,52 @@
 {% load static %}
 
 {% block content %}
-    <h1>Register</h1>
-    <form method="post">
-        {% csrf_token %}
-        <p>{{ msg }}</p>
-        <input type="text" name="username" placeholder="login">
-        <input type="password" name="password" placeholder="***">
-        <input type="email" name="email" placeholder="email@gmail.com">
-        <input type="text" name="name" placeholder="Ім'я">
-        <input type="text" name="surname" placeholder="Прізвище">
-        <input type="text" name="last_name" placeholder="По батькові">
-        <button type="submit"> Auth </button>
-    </form>
+    <div class="container" style="background: #384452">
+        <div class="row">
+            <div class="offset-md-3 col-md-6">
+                <form class="form-horizontal" method="post">
+                     {% csrf_token %}
+                     <p>{{ msg }}</p>
+                    <span class="heading">РЕЄСТРАЦІЯ</span>
+                    <!-- Name -->
+                    <div class="form-group help">
+                        <input type="text" name="name" class="form-control" placeholder="Ім'я">
+                        <i class="fa fa-bookmark"></i>
+                    </div>
+                    <!-- Surname -->
+                    <div class="form-group help">
+                        <input type="text" name="surname" class="form-control" placeholder="Прізвище">
+                        <i class="fa fa-bookmark"></i>
+                    </div>
+                    <!-- Last name -->
+                    <div class="form-group help">
+                        <input type="text" name="last_name" class="form-control" placeholder="По батькові">
+                        <i class="fa fa-bookmark"></i>
+                    </div>
+                    <!-- Login -->
+                    <div class="form-group">
+                        <input type="text" name="username" class="form-control" placeholder="Login">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <!-- Email -->
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="E-mail">
+                        <i class="fa fa-envelope"></i>
+                    </div>
+                    <!-- Password -->
+                    <div class="form-group help">
+                        <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
+                        <i class="fa fa-lock"></i>
+                        <a href="#" class="fa fa-question-circle"></a>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="form-control btn btn-dark" value="Реєстрація">
+                    </div>
+
+                    <br><br>
+                </form>
+            </div>
+
+        </div><!-- /.row -->
+    </div><!-- /.container -->
 {% endblock content %}

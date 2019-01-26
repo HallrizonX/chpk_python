@@ -2,12 +2,32 @@
 {% load static %}
 
 {% block content %}
-    <h1>Login</h1>
-    <form method="post">
-        {% csrf_token %}
-        <p>{{ msg }}</p>
-        <input type="text" name="username" placeholder="login">
-        <input type="password" name="password" placeholder="***">
-        <button type="submit"> Auth </button>
-    </form>
+        <div class="container" style="background: #384452">
+        <div class="row">
+            <div class="offset-md-3 col-md-6" style="margin-top: 9%">
+
+                <form class="form-horizontal" method="post">
+                     {% csrf_token %}
+                     <p>{{ msg }}</p>
+                    <span class="heading">Авторизація</span>
+                    <!-- Login -->
+                    <div class="form-group">
+                        <input type="text" name="username" class="form-control" placeholder="Login">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <!-- Password -->
+                    <div class="form-group help">
+                        <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
+                        <i class="fa fa-lock"></i>
+                        <a href="#" class="fa fa-question-circle"></a>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="form-control btn btn-dark" value="Авторизація">
+                    </div>
+                    <br><br>
+                </form>
+            </div>
+
+        </div><!-- /.row -->
+    </div><!-- /.container -->
 {% endblock content %}

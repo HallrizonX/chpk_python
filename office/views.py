@@ -17,6 +17,8 @@ class OfficeIndex(LoginRequiredMixin, View):
         elif user.access_profile == "teacher":
             return render(request, 'office/index_student.html', context={"user": user})
 
+        return render(request, 'office/not_access.html', context={})
+
 
 
 

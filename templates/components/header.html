@@ -1,0 +1,36 @@
+{% load static %}
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-header"
+                aria-controls="navbar-header" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar-header">
+
+            <a class="navbar-brand" href="/">ЧПК</a>
+
+            <ul class="navbar-nav  mr-auto mt-2 mt-lg-0">
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/office/">Офіс</a>
+                    </li>
+                {% endif %}
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" id="search" type="search" placeholder="Пошук" aria-label="Search">
+                {% if request.user.is_authenticated %}
+                    <a class="nav-link" href="/auth/logout/">Вихід</a>
+                {% else %}
+                    <a class="nav-link" href="/auth/register/">Реєстрація</a>
+                    <a class="nav-link" href="/auth/login/">Авторизація</a>
+                {% endif %}
+            </form>
+
+        </div>
+    </nav>
+</header>
+
+<script type="text/javascript">
+
+</script>
