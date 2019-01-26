@@ -5,6 +5,7 @@ from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import *
 
+
 class OfficeIndex(LoginRequiredMixin, View):
     login_url = '/auth/login/'
     redirect_field_name = ''
@@ -24,26 +25,3 @@ class OfficeIndex(LoginRequiredMixin, View):
             })
 
         return render(request, 'office/not_access.html', context={})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#class PostDetail(ObjectDetailMixin, View):
-#    model = Post
-#    template = 'timetable/detail_group.html'
-#    queryType = "post"
-
-#class TagDetail(ObjectDetailMixin, View):
-#    model = Post
-#    template = 'timetable/tags.html'
-#    queryType = "tag"

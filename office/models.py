@@ -18,10 +18,12 @@ class Subject(models.Model):
     def __str__(self):
         return "Предмет - {}, група - {}".format(self.name, self.group.number)
 
+    def get_absolute_url(self):
+        return "/subject/{}/".format(self.slug)
+
 
 def file_folder(instance, filename):
     filename = instance.title + '.' + filename.split('.')[1]
-
     return "files/{0}".format(filename)
 
 
@@ -32,6 +34,9 @@ class Files(models.Model):
 
     def __str__(self):
         return "{}".format(self.title)
+
+    def get_absolute_url(self):
+        return "/media/{}".format(self.file)
 
 
 class Teacher(models.Model):

@@ -1,0 +1,12 @@
+{% extends 'subject/base.html' %}
+{% load static %}
+
+{% block content %}
+{% for subject in subjects %}
+    <hr>
+    <a href="{{ subject.get_absolute_url }}">
+        Предмет - {{ subject.name }}, група - {{ subject.group.number }}
+    </a>
+{% endfor %}
+<hr>
+{% endblock content %}
