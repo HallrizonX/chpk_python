@@ -13,7 +13,9 @@ urlpatterns = [
     # Personal room for register users
     path('office/', include('office.urls')),
     # Subjects
-    path('subject/', include('subject.urls'))
+    path('subject/', include('subject.urls')),
+    # Ajax requests
+    path('api/', include('ajaxRequest.urls'))
 ]
 
 if settings.DEBUG:

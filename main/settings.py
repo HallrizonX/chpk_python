@@ -27,7 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'office',
     'authorization',
-    'subject'
+    'subject',
+    'ajaxRequest'
 ]
 
 MIDDLEWARE = [
@@ -112,15 +113,12 @@ SITE = 1
 
 # default static files settings for PythonAnywhere.
 # see https://help.pythonanywhere.com/pages/DjangoStaticFiles for more info
-#MEDIA_ROOT = u'/home/hallrizonX/main/media'
-#MEDIA_URL = '/media/'
-#STATIC_ROOT = u'/home/hallrizonX/main/static'
-#STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-    os.path.join(BASE_DIR, 'media')
-]
+if DEBUG:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static'),
+        os.path.join(BASE_DIR, 'media')
+    ]
 
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'

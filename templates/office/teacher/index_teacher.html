@@ -19,10 +19,5 @@
         <p>group - {{ subject.group.number }}</p>
     {% endfor %}
     <br>
-    <h1> Files</h1>
-    {% for file in files %}
-        <p>path - {{ file.file }}</p>
-        <p>title - {{ file.title }}</p>
-        <p>subject - {{ file.subject }}</p>
-    {% endfor %}
+    {% include 'office/teacher/files.html' %}
 {% endblock content %}

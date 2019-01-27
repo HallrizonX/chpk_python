@@ -21,7 +21,7 @@ class OfficeIndex(LoginRequiredMixin, View):
             return render(request, 'office/teacher/index_teacher.html', context={
                 "user": user,
                 "subjects": teacher.subjects,
-                "files": teacher.files.all()
+                "files": teacher.files.all().order_by('subject__group__number', 'subject__name')
             })
 
         return render(request, 'office/not_access.html', context={})
