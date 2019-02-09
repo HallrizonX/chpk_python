@@ -18,10 +18,12 @@ class OfficeIndex(LoginRequiredMixin, View):
         elif user.access_profile == "teacher":
 
             teacher = Teacher.objects.get(profile__user=request.user)
+
             return render(request, 'office/teacher/index_teacher.html', context={
                 "user": user,
                 "subjects": teacher.subjects,
                 "files": teacher.files.all().order_by('subject__group__number', 'subject__name')
             })
+
 
         return render(request, 'office/not_access.html', context={})

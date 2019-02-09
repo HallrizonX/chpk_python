@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import TeacherFilesRequest
+from .views import TeacherFilesRequest, TeacherFilesAddRequest
 
 urlpatterns = [
     path("teacher.files/", TeacherFilesRequest.as_view(), name="teacher.files"),
-
+    path("teacher.files.add/", TeacherFilesAddRequest.as_view(), name="teacher.files.add"),
 
     #path("<str:slug>/", SubjectDetail.as_view(), name="detail_url"),
     #path("tags/<str:slug>/", TagDetail.as_view(), name="tags"),

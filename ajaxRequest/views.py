@@ -10,7 +10,6 @@ class TeacherFilesRequest(LoginRequiredMixin, View):
     login_url = '/auth/login/'
     redirect_field_name = ''
 
-
     def post(self, request):
         f = Files.objects.get(id=request.POST["id"])
 
@@ -24,8 +23,7 @@ class TeacherFilesRequest(LoginRequiredMixin, View):
 
         f.save()
 
-        return HttpResponseRedirect('/office/#href-'+str(f.id))
-
+        return HttpResponseRedirect('/office/#href-' + str(f.id))
 
     def get(self, request):
         Files.objects.get(id=request.GET['id']).delete()
@@ -33,3 +31,16 @@ class TeacherFilesRequest(LoginRequiredMixin, View):
         return HttpResponse()
 
 
+class TeacherFilesAddRequest(LoginRequiredMixin, View):
+    login_url = '/auth/login/'
+    redirect_field_name = ''
+
+    def post(self, request):
+        subject = Subject.objects.get(id=request.POST["subject"])
+
+        f = Files(file=request.FILES["file"], title=request.POST["title"], subject_id=subject.id)
+        f.save()
+        teacher = Teacher.objects.get(profile__user=request.user)
+        teacher.files.add(f)
+        teacher.save()
+        return HttpResponseRedirect('/office/')
