@@ -28,7 +28,7 @@ INSTALLED_APPS = [
     'office',
     'authorization',
     'subject',
-    'ajaxRequest'
+    'httpRequest'
 ]
 
 MIDDLEWARE = [

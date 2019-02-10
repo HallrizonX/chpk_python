@@ -15,7 +15,7 @@ urlpatterns = [
     # Subjects
     path('subject/', include('subject.urls')),
     # Ajax requests
-    path('api/', include('ajaxRequest.urls'))
+    path('api/', include('httpRequest.urls'))
 ]
 
 if settings.DEBUG:
