@@ -61,4 +61,4 @@ class TeacherGetFilesAjax(LoginRequiredMixin, View):
     def get(self, request):
         files = Files.objects.all().filter(subject_id=request.GET["id"])
 
-        return render(request, 'office/teacher/print-files.html', context={'files': files})
+        return render(request, 'office/teacher/ajax-print-files.html', context={'files': files})

@@ -3,24 +3,7 @@
 
 {% include 'office/teacher/add_file.html' %}
 
-<!--  Start Print files table Modal -->
-<div class="modal fade" id="print-files" tabindex="-1" role="dialog" aria-labelledby="print-files"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="file-title">Вікно редагування даних</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Print files Modal -->
-
+<!--------------------------------------------Start List card subjects------------------------------------------------->
 <div class="popular-articles">
     <div class="mini-card-grid">
         {% for subject in subjects.all %}
@@ -56,8 +39,8 @@
         {% endfor %}
     </div>
 </div>
-
-<!--  Start Edit Modal -->
+<!--------------------------------------------End card subjects-------------------------------------------------------->
+<!--------------------------------------------Start Editing Modal ----------------------------------------------------->
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -90,6 +73,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-warning last-modal" data-dismiss="modal">Назад</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
                     <button class="btn btn-success center-block" type="submit">Оновити дані</button>
                 </div>
@@ -97,9 +81,8 @@
         </div>
     </div>
 </div>
-<!-- End Edit Modal -->
-
-<!-- Start Delete Modal -->
+<!--------------------------------------------End Editing Modal ------------------------------------------------------->
+<!--------------------------------------------Start delet file in modal ----------------------------------------------->
 <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="delete" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -114,39 +97,60 @@
                 <input type="hidden" id="del-id">
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-warning last-modal" data-dismiss="modal">Назад</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
                 <button type="button" id="del-action" class="btn btn-danger">Видалити</button>
             </div>
         </div>
     </div>
 </div>
-<!-- End Delete Modal -->
+<!--------------------------------------------End delet file in modal ------------------------------------------------->
+<!-------------------------------------Start print files in modal ----------------------------------------------------->
+<div class="modal fade" id="print-files" tabindex="-1" role="dialog" aria-labelledby="print-files"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="file-title">Список предметів</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+<!-------------------------------------End print files in modal ------------------------------------------------------->
 
 <script type="text/javascript">
     $(document).ready(function () {
         // Urls for ajax request
-        var TEACHER_FILES = '/api/teacher.files/';
+        var TEACHER_DELETE_FILES = '/api/teacher.files/';
         var TEACHER_GET_FILES = '/api/teacher.get.files/';
+        // Get jqury body
         var $body = $("body");
 
-        // Data into field when even click to delete
+        // Open last modal with table of files
+        $(".last-modal").on('click', function () {
+           $("."+window.lastModal).click();
+        });
+        // insert data in detele modal
         $body.on('click', '.delete-files', function () {
+            $("#print-files").modal('hide');
             $("#del-file").text($(this).data('title'));
-            $("#del-path").html("<a href='" + $(this).data('path') + "'>" + $(this).data('path') + "</a>")
+            $("#del-path").html("<a href='" + $(this).data('path') + "'>" + $(this).data('path') + "</a>");
             $("#del-id").val($(this).data('id'));
         });
 
-        // Print files
-        $body.on("click", ".print-files", function (e) {
-            e.preventDefault();
+        // Ajax request for get table of files and write data into modal
+        $body.on("click", ".print-files", function () {
             var id = $(this).data('id');
-            console.log(id);
+            window.lastModal = "open-"+id;
             $.ajax({
                 type: 'GET',
                 url: TEACHER_GET_FILES,
-                data: {
-                    "id": id,
-                },
+                data: {"id": id},
                 success: function (data) {
                     $("#print-files .modal-body").html("");
                     $("#print-files .modal-body").append(data);
@@ -154,18 +158,15 @@
             });
         });
 
-        // Delete file
+        // Ajax request for deleting file from DB
         $body.on("click", "#del-action", function (e) {
             e.preventDefault();
             $("#delete").modal('hide');
             $("#print-files").modal('hide');
-            // Delete files
             $.ajax({
                 type: 'GET',
-                url: TEACHER_FILES,
-                data: {
-                    "id": $("#del-id").val(),
-                },
+                url: TEACHER_DELETE_FILES,
+                data: {"id": $("#del-id").val()},
                 success: function (data) {
                     var id = data.id;
                     setTimeout(function () {
@@ -175,8 +176,9 @@
             });
         });
 
-        // Change values in modal from button
+        // Insert data from button `change` into modal
         $body.on('click', '.change-files', function () {
+            $("#print-files").modal('hide');
             $("#title").val($(this).data('title'));
             $("#subject-name").text($(this).data('subject-name'));
             $("#group-number").text($(this).data('group-number'));
@@ -184,12 +186,22 @@
             $("#path-file").attr("href", $(this).data('path'));
             $("#path-file").text($(this).data('path'));
         });
-        function getParameterByName(name, url) {if (!url) url = window.location.href;name = name.replace(/[\[\]]/g, '\\$&');var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'), results = regex.exec(url);if (!results) return null;if (!results[2]) return '';return decodeURIComponent(results[2].replace(/\+/g, ' '));}
+
+        // Parse url and get GET-params
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'), results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        // Open modal if url have id-param
         try {
             setTimeout(function () {
                 $(".open-" + getParameterByName('id')).click();
                 window.history.pushState({page: "another"}, "another page", "/office/");
-
             }, 600);
         } catch (e) {}
     });

@@ -1,9 +1,8 @@
 .block-files {
     background-color: #273549;
-background-image: linear-gradient(62deg, #243244 0%, #39274e 100%);
-
+    background-image: linear-gradient(62deg, #243244 0%, #243244 100%);
     padding-bottom: 10px;
-    border-radius: 50px 50px 0 0;
+    border-radius: 0;
 }
 
 .both95 {
@@ -41,12 +40,15 @@ background-image: linear-gradient(62deg, #243244 0%, #39274e 100%);
 .btn:active {
     outline: none
 }
+
 button:active {
     outline: none
 }
+
 button:focus {
     outline: none
 }
+
 .btn:focus {
     outline: none
 }
@@ -54,7 +56,7 @@ button:focus {
 
 @media (max-width: 1200px) {
     .popular-articles {
-        scrollbar-color: #201c29;
+        scrollbar-color: #484857;
         scrollbar-width: 10px;
         width: 100%;
         padding-bottom: 2rem;
@@ -105,14 +107,14 @@ button:focus {
 }
 
 .mini-card-grid {
-    scrollbar-color: #201c29;
+    scrollbar-color: #484857;
     scrollbar-width: 10px;
     scrollbar-gutter: always;
     padding: 3rem;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    justify-content:center;
+    justify-content: center;
     overflow-x: scroll;
     -webkit-overflow-scrolling: touch
 }
@@ -263,17 +265,19 @@ button:focus {
     grid-area: auto;
 }
 
-.all-files{
+.all-files {
     padding: 10px;
     border-radius: 30px;
     width: 100%;
     background: none;
 }
-.all-files:not(hover){
+
+.all-files:not(hover) {
     transition: 400ms;
     border-radius: 30px;
 }
-.all-files:hover{
+
+.all-files:hover {
     transition: 400ms;
     border-radius: 0;
 }
