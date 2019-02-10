@@ -1,14 +1,14 @@
 <div class="container">
-<div class="row">
-    <div class="offset-md-4 col-4">
-      <button type="button" class="btn btn btn-warning change-files" data-toggle="modal"
-        data-target="#add-file"
-      style="width: 100%; font-size: 1.3em"
-      >
-    Додати файл
-    </button>
+    <div class="row" style="padding-bottom: 15px">
+        <div class="offset-lg-4 col-lg-4">
+            <button type="button" class="btn-add-file change-files" data-toggle="modal"
+                    data-target="#add-file"
+                    style="width: 100%; font-size: 1.3em"
+            >
+                Додати файл
+            </button>
+        </div>
     </div>
-</div>
 </div>
 <!--  Start ADD Modal -->
 <div class="modal fade" id="add-file" tabindex="-1" role="dialog" aria-labelledby="add-file"
@@ -26,13 +26,13 @@
                 <div class="modal-body">
                     <hr class="my-3">
                     <div class="form-group">
-                        <label for="title">Назва документа</label>
-                        <input type="text" name="title" class="form-control" id="title"
+                        <label for="title2">Назва документа</label>
+                        <input type="text" name="title" class="form-control" id="title2"
                                placeholder="Назва документа">
                     </div>
                     <div class="form-group">
-                        <label for="inputState">Виберіть предмет</label>
-                        <select name="subject" id="inputState" class="form-control">
+                        <label for="inputState2">Виберіть предмет</label>
+                        <select name="subject" id="inputState2" class="form-control">
                             {% for subject in subjects.all %}
                                 <option value="{{ subject.id }}">{{ subject.name }} - {{ subject.group.number }}
                                     група
@@ -42,8 +42,8 @@
                     </div>
                     <hr class="my-4">
                     <div class="form-group">
-                        <label for="file-upload">Завантажте файл: <a href="" id="path-file"></a></label><br>
-                        <input type="file" name="file" id="file-upload">
+                        <label for="file-upload2">Завантажте файл: <a href="" id="path-file2"></a></label><br>
+                        <input type="file" name="file" id="file-upload2">
                     </div>
 
                 </div>

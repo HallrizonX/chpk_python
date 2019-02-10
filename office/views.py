@@ -14,12 +14,12 @@ class OfficeIndex(LoginRequiredMixin, View):
         user = get_object_or_404(Profile, user=request.user)
 
         if user.access_profile == "student":
-            return render(request, 'office/student/index_student.html', context={"user": user})
+            return render(request, 'office/student/index.html', context={"user": user})
         elif user.access_profile == "teacher":
 
             teacher = Teacher.objects.get(profile__user=request.user)
 
-            return render(request, 'office/teacher/index_teacher.html', context={
+            return render(request, 'office/teacher/index.html', context={
                 "user": user,
                 "subjects": teacher.subjects,
                 "files": teacher.files.all().order_by('subject__group__number', 'subject__name')
