@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
+from django.http import JsonResponse, HttpResponseRedirect
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from office.models import *
-from django.views.decorators.csrf import csrf_protect
+import os
 
 
 class TeacherFilesRequest(LoginRequiredMixin, View):
@@ -11,8 +11,7 @@ class TeacherFilesRequest(LoginRequiredMixin, View):
     login_url = '/auth/login/'
     redirect_field_name = ''
 
-    """ Change data file in DB"""
-
+    # Change data of file in DB
     def post(self, request):
         f = Files.objects.get(id=request.POST["id"])
 
@@ -22,18 +21,17 @@ class TeacherFilesRequest(LoginRequiredMixin, View):
             if request.FILES["file"] is not None and request.FILES["file"] != "":
                 f.file = request.FILES["file"]
         except:
-            pass
+            return HttpResponseRedirect('/office/')
 
         f.save()
         return HttpResponseRedirect('/office/?id=' + str(f.subject_id))
 
-    """ Remove file from DB"""
-
+    # Remove file from DB
     def get(self, request):
         f = Files.objects.get(id=request.GET['id'])
-        sub_id = f.subject_id
+        sub_id, file_path = f.subject_id, f.file.path
         f.delete()
-
+        os.remove(file_path)
         return JsonResponse({'id': sub_id})
 
 
@@ -43,13 +41,15 @@ class TeacherFilesAddRequest(LoginRequiredMixin, View):
     redirect_field_name = ''
 
     def post(self, request):
+        # writing data of file into DB (Files) and save local in folder /media/
         subject = Subject.objects.get(id=request.POST["subject"])
-
         f = Files(file=request.FILES["file"], title=request.POST["title"], subject_id=subject.id)
         f.save()
+        # create relations between tables(File, Teacher)
         teacher = Teacher.objects.get(profile__user=request.user)
         teacher.files.add(f)
         teacher.save()
+
         return HttpResponseRedirect('/office/')
 
 
