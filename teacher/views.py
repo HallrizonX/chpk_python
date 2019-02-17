@@ -25,14 +25,12 @@ class TeacherDetail(LoginRequiredMixin, View):
     login_url = '/auth/login/'
     redirect_field_name = ''
 
-    def get(self, request, slug):
+    def get(self, request, username):
 
-        subject = get_object_or_404(Subject, slug=slug)
-        teacher = get_object_or_404(Teacher, subjects__slug=slug)
-        files = get_list_or_404(Files.objects.filter(subject__slug=slug))
+        teacher = get_object_or_404(Teacher, profile__user__username=username)
 
-        return render(request, 'subject/detail.html', context={
-            "subject": subject,
+        return render(request, 'public_teacher/detail.html', context={
+            "subjects": teacher.subjects,
             "teacher": teacher,
-            "files": files,
+            "files": teacher.files.all(),
         })

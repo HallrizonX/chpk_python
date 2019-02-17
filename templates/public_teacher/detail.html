@@ -1,0 +1,92 @@
+{% extends 'public_teacher/base.html' %}
+{% block content %}
+    <!-------------------------------------Start print files in modal ----------------------------------------------------->
+<div class="modal fade" id="print-files" tabindex="-1" role="dialog" aria-labelledby="print-files"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="">
+            <div class="modal-header">
+                <h5 class="modal-title" id="file-title">Список предметів</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+<!-------------------------------------End print files in modal ------------------------------------------------------->
+
+    {# Start work with files #}
+    <div class="block-files">
+        <!--------------------------------------------Start List card subjects------------------------------------------------->
+        <div class="popular-articles">
+            <div class="mini-card-grid">
+                {% for subject in subjects.all %}
+                    <article class="mini-card module module-article article">
+                        <header class="mini-article-card-header">
+                            <div class="mini-article-card-title">
+                                <div class="mini-article-subhead">
+                                    <hr class="my-2">
+                                </div>
+                                <h2 class="">
+                                    <a href="" class="article-card-header read-article">
+                                        Група: {{ subject.group.number }}
+                                    </a>
+                                    <br><br><br>
+                                    <p class="article-card-header read-article"
+                                       style="transform: rotate(10deg); color: white">
+                                        {{ subject.name }}
+                                    </p>
+                                </h2>
+                            </div>
+                            <div class="author-name-area">
+
+                                <button type="button"
+                                        data-id="{{ subject.id }}"
+                                        class="btn btn-success print-files open-{{ subject.id }} all-files"
+                                        data-toggle="modal"
+                                        data-target="#print-files">
+                                    Всі файли
+                                </button>
+
+                            </div>
+                        </header>
+                    </article>
+                {% endfor %}
+            </div>
+        </div>
+        <!--------------------------------------------End card subjects-------------------------------------------------------->
+    </div>
+<script>
+$(document).ready(function () {
+    var TEACHER_GET_FILES = '/api/teacher.get.files.secure/';
+        // Get jqury body
+        var $body = $("body");
+   // Ajax request for get table of files and write data into modal
+        $body.on("click", ".print-files", function () {
+            $("#print-files .modal-body").html("");
+            $("#print-files .modal-body").append("<div class=\" text-center spinner-border text-warning\" role=\"status\">\n" +
+                "  <span class=\"sr-only\">Loading...</span>\n" +
+                "</div>");
+
+            var id = $(this).data('id');
+            window.lastModal = "open-"+id;
+            $.ajax({
+                type: 'GET',
+                url: TEACHER_GET_FILES,
+                data: {"id": id},
+                success: function (data) {
+                    if ($(data).find('tr').length == 1){
+                        $("#print-files .modal-body").html('<p style="font-size: 2em; color: currentColor;" class="text-center">Файлів не знайдено</p>');
+                    }else {
+                        $("#print-files .modal-body").html("");
+                        $("#print-files .modal-body").append(data);
+                    }
+                }
+            });
+        });
+});
+</script>
+{% endblock content %}
