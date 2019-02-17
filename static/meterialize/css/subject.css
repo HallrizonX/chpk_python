@@ -1,0 +1,34 @@
+.subject-main-table {
+    border: 2px solid rgba(30, 144, 255, 0.47);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.subject-table {
+    background: rgba(30, 144, 255, 0.47);
+    font-size: 1.3em;
+}
+#subject-search{
+    border: 2px solid dodgerblue;
+    -webkit-border-radius: 60px;
+    -moz-border-radius: 60px;
+    border-radius: 60px;
+    height: 50px;
+    background: #515151;
+}
+#input-search{
+    border: none;
+    border-radius: 50px;
+    background: #515151;
+    font-size: 1.4em;
+    color: whitesmoke;
+    text-align: left;
+    width: 83%;
+    white-space: nowrap;
+}
+#input-search:active, #input-search:focus{
+    border: none;
+    box-shadow: none;
+}
+.subject-tr:hover{
+    background: rgba(30, 144, 255, 0.4);
+}

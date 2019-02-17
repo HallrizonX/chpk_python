@@ -73,3 +73,17 @@ class TeacherGetFilesSecureAjax(LoginRequiredMixin, View):
         files = Files.objects.all().filter(subject_id=request.GET["id"])
 
         return render(request, 'office/teacher/ajax-print-files-secure.html', context={'files': files})
+
+
+class FindSubjectAjax(LoginRequiredMixin, View):
+    """ Class for get html template with data of files by ajax request and ID certain subject"""
+    login_url = '/auth/login/'
+    redirect_field_name = ''
+
+    def get(self, request):
+        if request.GET["text"] == "":
+            subjects = Subject.objects.all().order_by()
+        else:
+            subjects = Subject.objects.filter(group__number=request.GET["text"])
+
+        return render(request, 'subject/table.html', context={'subjects': subjects})

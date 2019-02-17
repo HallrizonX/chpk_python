@@ -2,7 +2,9 @@
 {% load static %}
 
 {% block content %}
-    <div class="container-fluid">
+<diV class="container">
+<div class="row">
+    <div class="col-12">
         <h1> Предмет - {{ subject.name }}</h1>
         <h1> Курс - {{ subject.group.number }}</h1>
         <hr class="my-4">
@@ -43,4 +45,6 @@
             </table>
         </div>
     </div>
+</div>
+</diV>
 {% endblock content %}

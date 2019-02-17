@@ -13,7 +13,7 @@ class SubjectIndex(LoginRequiredMixin, View):
     def get(self, request):
         subjects = get_list_or_404(Subject.objects.order_by('group__number', 'name'))
         return render(request, 'subject/index.html', context={
-            "subjects": subjects,
+            "subjects": subjects
         })
 
 

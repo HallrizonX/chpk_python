@@ -1,0 +1,10 @@
+{% for subject in subjects %}
+    <tr class="subject-tr" style="font-size: 1.2em; cursor: pointer"
+        onclick="location.href='{{ subject.get_absolute_url }}'">
+        <td>{{ subject.group }}</td>
+        <td>{{ subject.name }}</td>
+        <td><a href="{{ subject.get_absolute_url }}">
+            <i class="tiny material-icons" style="font-size: 1.9em;">forward</i></a>
+        </td>
+    </tr>
+{% endfor %}

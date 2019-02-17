@@ -1,22 +1,25 @@
-{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <title>Реєстрація</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" href="{% static 'libs/bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/components/main.css' %}">
- <link type="text/css" rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <script src="{% static 'libs/jquery/jquery-3.3.1.min.js' %}"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/static/meterialize/css/materialize.min.css"
+          media="screen,projection"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/static/css/components/main.css">
+    <link rel="stylesheet" href="/static/meterialize/css/subject.css">
 </head>
 <body>
-{% include 'components/header.html' %}
+{% include 'components/left-menu.html' %}
+{% include 'components/clock.html' %}
 
-{% block content %} {% endblock content %}
+{% block content %}{% endblock content %}
 
-<script src="{% static 'libs/bootstrap/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'libs/bootstrap/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="/static/libs/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/static/meterialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="/static/meterialize/js/subject.js"></script>
 </body>
 </html>

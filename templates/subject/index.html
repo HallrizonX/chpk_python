@@ -2,11 +2,39 @@
 {% load static %}
 
 {% block content %}
-{% for subject in subjects %}
-    <hr>
-    <a href="{{ subject.get_absolute_url }}">
-        Предмет - {{ subject.name }}, група - {{ subject.group.number }}
-    </a>
-{% endfor %}
-<hr>
+<div class="container">
+    <div class="row">
+        <div class="col offset-s3 s9 offset-m2 m19 offset-l3 l6 offset-xl3 xl6" id="subject-search">
+            <i class="small material-icons" style=" color: orange; font-size: 2em; position: relative; bottom: -7px">search</i>
+            <input type="text" name="search" id="input-search">
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col offset-s3 s9 offset-m2 m9 l12 xl12">
+            <table class="centered responsive-table subject-main-table">
+                <thead>
+                <tr>
+                    <th class="subject-table">Група</th>
+                    <th class="subject-table">Предмет</th>
+                    <th class="subject-table">Детально</th>
+                </tr>
+                </thead>
+                <tbody class="subject-table-body">
+                {% for subject in subjects %}
+                    <tr class="subject-tr" style="font-size: 1.2em; cursor: pointer" onclick="location.href='{{ subject.get_absolute_url }}'">
+                        <td>{{ subject.group }}</td>
+                        <td>{{ subject.name }}</td>
+                        <td><a href="{{ subject.get_absolute_url }}">
+                            <i class="tiny material-icons" style="font-size: 1.9em;">forward</i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
 {% endblock content %}
