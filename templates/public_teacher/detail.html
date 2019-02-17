@@ -20,6 +20,8 @@
 
     {# Start work with files #}
     <div class="block-files">
+    <h1 class="text-center text-white">Предмети та файли</h1>
+    <hr class="both95">
         <!--------------------------------------------Start List card subjects------------------------------------------------->
         <div class="popular-articles">
             <div class="mini-card-grid">
@@ -31,7 +33,7 @@
                                     <hr class="my-2">
                                 </div>
                                 <h2 class="">
-                                    <a href="" class="article-card-header read-article">
+                                    <a href="{{ subject.get_absolute_url }}" class="article-card-header read-article">
                                         Група: {{ subject.group.number }}
                                     </a>
                                     <br><br><br>
@@ -50,6 +52,10 @@
                                         data-target="#print-files">
                                     Всі файли
                                 </button>
+                                <hr >
+                                <a href="{{ subject.get_absolute_url }}" class="text-right" style="font-weight: 500;">
+                                    Детально
+                                </a>
 
                             </div>
                         </header>
