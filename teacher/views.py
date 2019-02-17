@@ -12,9 +12,7 @@ class TeacherIndex(LoginRequiredMixin, View):
 
     def get(self, request):
         teachers = get_list_or_404(Teacher.objects.order_by('profile__name'))
-        for teacher in teachers:
-            print(teacher.get_absolute_url())
-            print(teacher.subjects.all())
+
         return render(request, 'public_teacher/index.html', context={
             "teachers": teachers,
         })

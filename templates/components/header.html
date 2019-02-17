@@ -1,7 +1,7 @@
 {% load static %}
 <header>
 
-    <nav class="navbar navbar-expand-lg navbar-light " style="background: rgba(68,61,77,0.25);">
+    <nav class="navbar navbar-expand-lg navbar-light " style="background: rgb(173,167,175);">
     <a class="navbar-brand text-left align-left float-left" href="/"
            style="border: 2px solid rgba(128,128,128,0.58); padding: 5px; border-radius: 10px; font-weight: 500">
             <span style="font-size: 1.5em; color: rgba(33,33,33,0.82);">ЧПК</span>
@@ -18,13 +18,13 @@
                 <ul class="navbar-nav">
                     {% if request.user.is_authenticated %}
                     <li class="nav-item menu-head">
-                        <a class="nav-link" href="/office/">Офіс</a>
+                        <a class="nav-link" href="/office/" style="color: black;">Офіс</a>
                     </li>
                     <li class="nav-item menu-head">
-                        <a class="nav-link" href="/subject/">Предмети</a>
+                        <a class="nav-link" href="/subject/" style="color: black;">Предмети</a>
                     </li>
                     <li class="nav-item menu-head">
-                        <a class="nav-link " href="/teacher/">Викладачі</a>
+                        <a class="nav-link " href="/teacher/" style="color: black;">Викладачі</a>
                     </li>
                 {% endif %}
                 </ul>
