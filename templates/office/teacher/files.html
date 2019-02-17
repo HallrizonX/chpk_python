@@ -144,6 +144,11 @@
 
         // Ajax request for get table of files and write data into modal
         $body.on("click", ".print-files", function () {
+            $("#print-files .modal-body").html("");
+            $("#print-files .modal-body").append("<div class=\" text-center spinner-border text-warning\" role=\"status\">\n" +
+                "  <span class=\"sr-only\">Loading...</span>\n" +
+                "</div>");
+
             var id = $(this).data('id');
             window.lastModal = "open-"+id;
             $.ajax({
@@ -151,8 +156,12 @@
                 url: TEACHER_GET_FILES,
                 data: {"id": id},
                 success: function (data) {
-                    $("#print-files .modal-body").html("");
-                    $("#print-files .modal-body").append(data);
+                    if ($(data).find('tr').length == 1){
+                        $("#print-files .modal-body").html('<p style="font-size: 2em; color: currentColor;" class="text-center">Файлів не знайдено</p>');
+                    }else {
+                        $("#print-files .modal-body").html("");
+                        $("#print-files .modal-body").append(data);
+                    }
                 }
             });
         });
