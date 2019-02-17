@@ -26,7 +26,10 @@ class SubjectDetail(LoginRequiredMixin, View):
 
         subject = get_object_or_404(Subject, slug=slug)
         teacher = get_object_or_404(Teacher, subjects__slug=slug)
-        files = get_list_or_404(Files.objects.filter(subject__slug=slug))
+        try:
+            files = Files.objects.filter(subject__slug=slug)
+        except FileNotFoundError:
+            pass
 
         return render(request, 'subject/detail.html', context={
             "subject": subject,

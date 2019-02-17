@@ -1,0 +1,31 @@
+{% extends 'public_teacher/base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            {% for teacher in teachers %}
+                <div class="card w-25 col-10 col-sm-6 col-md-4 col-xl-3 ">
+                    <div class="card-body">
+                        <h6 class="card-title"><a href="{{ teacher.get_absolute_url }}">
+                            {{ teacher.profile.surname }} {{ teacher.profile.name }} {{ teacher.profile.last_name }}
+                        </a>
+                        </h6>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton{{ teacher.id }}"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Предмети
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ teacher.id }}">
+                                {% for subject in teacher.subjects.all %}
+                                    <a class="dropdown-item" href="{{ subject.get_absolute_url }}">{{ subject.group }}
+                                        : {{ subject.name }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock content %}

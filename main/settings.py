@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'office',
     'authorization',
     'subject',
+    'teacher',
     'httpRequest'
 ]
 

@@ -14,7 +14,9 @@ urlpatterns = [
     path('office/', include('office.urls')),
     # Subjects
     path('subject/', include('subject.urls')),
-    # Ajax requests
+    # Teacher
+    path('teacher/', include('teacher.urls')),
+    # Ajax, Post, Get requests from form
     path('api/', include('httpRequest.urls'))
 ]
 

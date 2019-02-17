@@ -1,6 +1,6 @@
 from django.db import models
 from authorization.models import *
-
+import os
 
 class Group(models.Model):
     number = models.IntegerField(max_length=4, unique=True)
@@ -46,3 +46,6 @@ class Teacher(models.Model):
 
     def __str__(self):
         return "{} {} {}".format(self.profile.name, self.profile.surname, self.profile.last_name)
+
+    def get_absolute_url(self):
+        return '/teacher/{}/'.format(self.profile.user.username)
