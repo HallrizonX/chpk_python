@@ -17,6 +17,8 @@ class TeacherFilesRequest(LoginRequiredMixin, View):
 
         if request.POST["title"].replace(" ", "") != "":
             f.title = request.POST["title"]
+
+            f.save()
         try:
             if request.FILES["file"] is not None and request.FILES["file"] != "":
                 f.file = request.FILES["file"]
@@ -33,7 +35,6 @@ class TeacherFilesRequest(LoginRequiredMixin, View):
         f.delete()
         os.remove(file_path)
         return JsonResponse({'id': sub_id})
-
 
 class TeacherFilesAddRequest(LoginRequiredMixin, View):
     """ Class for adding new file in DB"""
@@ -52,7 +53,6 @@ class TeacherFilesAddRequest(LoginRequiredMixin, View):
 
         return HttpResponseRedirect('/office/')
 
-
 class TeacherGetFilesAjax(LoginRequiredMixin, View):
     """ Class for get html template with data of files by ajax request and ID certain subject"""
     login_url = '/auth/login/'
@@ -63,7 +63,6 @@ class TeacherGetFilesAjax(LoginRequiredMixin, View):
 
         return render(request, 'office/teacher/ajax-print-files.html', context={'files': files})
 
-
 class TeacherGetFilesSecureAjax(LoginRequiredMixin, View):
     """ Class for get html template with data of files by ajax request and ID certain subject"""
     login_url = '/auth/login/'
@@ -73,7 +72,6 @@ class TeacherGetFilesSecureAjax(LoginRequiredMixin, View):
         files = Files.objects.all().filter(subject_id=request.GET["id"])
 
         return render(request, 'office/teacher/ajax-print-files-secure.html', context={'files': files})
-
 
 class FindSubjectAjax(LoginRequiredMixin, View):
     """ Class for get html template with data of files by ajax request and ID certain subject"""
