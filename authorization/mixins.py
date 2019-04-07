@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
-from django.contrib.auth.decorators import login_required
 from authorization.utils.DBAudit import DBAudit
 from authorization.utils.UserTools import UserTools
 
@@ -10,11 +9,12 @@ class AuthMixin:
     """ Class for process authorization users """
     template = ""
 
-    @login_required(redirect_field_name='/office/')
     def get(self, request):
+
         return render(request, self.template, context={})
 
     def post(self, request):
+
         return UserTools.authenticate(request,
                                       username=request.POST['username'],
                                       password=request.POST['password'],
@@ -27,15 +27,13 @@ class RegisterMixin:
     template = ""
     href = "/auth/register/"
 
-    @login_required(redirect_field_name='/office/')
     def get(self, request):
         return render(request, self.template, context={})
 
-    @login_required(redirect_field_name='/office/')
     def post(self, request):
         data = request.POST
         if not DBAudit.check_email(data['email']) or not DBAudit.check_username(data['username']):
-            return render(request, self.template, context={"msg": "Пошта або логін вже використовується"})
+            return render(request, self.template, context={"msg": "Помилка з логіном або поштою"})
 
         # Create user
         User.objects.create_user(username=str(data['username']),
