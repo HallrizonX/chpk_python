@@ -12,7 +12,7 @@ $(document).ready(function () {
         console.log(val);
         $.ajax({
             type: 'GET',
-            url: '/api/find.subject/',
+            url: '/api/subjects/',
             data: {"text": val},
             success: function (data) {
                 $(".subject-table-body").html("");

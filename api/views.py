@@ -6,7 +6,7 @@ from office.models import *
 import os
 
 
-class TeacherFilesRequest(LoginRequiredMixin, View):
+class TeacherFiles(LoginRequiredMixin, View):
     """ Class for change and remove file in DB"""
     login_url = '/auth/login/'
     redirect_field_name = ''
@@ -36,7 +36,7 @@ class TeacherFilesRequest(LoginRequiredMixin, View):
         os.remove(file_path)
         return JsonResponse({'id': sub_id})
 
-class TeacherFilesAddRequest(LoginRequiredMixin, View):
+class TeacherFileAdd(LoginRequiredMixin, View):
     """ Class for adding new file in DB"""
     login_url = '/auth/login/'
     redirect_field_name = ''
@@ -53,7 +53,7 @@ class TeacherFilesAddRequest(LoginRequiredMixin, View):
 
         return HttpResponseRedirect('/office/')
 
-class TeacherGetFilesAjax(LoginRequiredMixin, View):
+class TeacherGetFiles(LoginRequiredMixin, View):
     """ Class for get html template with data of files by ajax request and ID certain subject"""
     login_url = '/auth/login/'
     redirect_field_name = ''
@@ -63,7 +63,7 @@ class TeacherGetFilesAjax(LoginRequiredMixin, View):
 
         return render(request, 'office/teacher/ajax-print-files.html', context={'files': files})
 
-class TeacherGetFilesSecureAjax(LoginRequiredMixin, View):
+class TeacherGetFilesSecure(LoginRequiredMixin, View):
     """ Class for get html template with data of files by ajax request and ID certain subject"""
     login_url = '/auth/login/'
     redirect_field_name = ''
@@ -73,7 +73,7 @@ class TeacherGetFilesSecureAjax(LoginRequiredMixin, View):
 
         return render(request, 'office/teacher/ajax-print-files-secure.html', context={'files': files})
 
-class FindSubjectAjax(LoginRequiredMixin, View):
+class SubjectsFind(LoginRequiredMixin, View):
     """ Class for get html template with data of files by ajax request and ID certain subject"""
     login_url = '/auth/login/'
     redirect_field_name = ''
@@ -82,6 +82,6 @@ class FindSubjectAjax(LoginRequiredMixin, View):
         if request.GET["text"] == "":
             subjects = Subject.objects.all().order_by()
         else:
-            subjects = Subject.objects.filter(group__number=request.GET["text"])
+            subjects = Subject.objects.filter(group__number__contains=request.GET["text"]).order_by('group__number')
 
         return render(request, 'subject/table.html', context={'subjects': subjects})
