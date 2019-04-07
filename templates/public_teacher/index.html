@@ -9,12 +9,14 @@
     <hr>
     <div class="row">
         {% for teacher in teachers %}
-            <div class="col s4 offset-s1 card" style="min-height: 100px">
+            <div class="col s4 offset-s1 card" style="min-height: 100px; background: rgba(235,235,235,0.92)">
                 <div class="card-body">
-                    <h6 class="card-title"><a href="{{ teacher.get_absolute_url }}">
-                        {{ teacher.profile.surname }} {{ teacher.profile.name }} {{ teacher.profile.last_name }}
-                    </a>
+                    <h6 class="card-title">
+                        <a class="text-center" style="color: #1e90ff" href="{{ teacher.get_absolute_url }}">
+                            {{ teacher.profile.surname }} {{ teacher.profile.name }} {{ teacher.profile.last_name }}
+                        </a>
                     </h6>
+                {% if teacher.subjects.all %}
                     <a class='dropdown-trigger btn col s12' href='#' data-target='dropdown{{ teacher.id }}'>Предмети</a>
                     <ul id='dropdown{{ teacher.id }}' class='dropdown-content'>
                         {% for subject in teacher.subjects.all %}
@@ -25,6 +27,7 @@
                             <li class="divider" tabindex="-1"></li>
                         {% endfor %}
                     </ul>
+                {% endif %}
                 </div>
 
             </div>
