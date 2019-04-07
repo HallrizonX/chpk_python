@@ -2,12 +2,17 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-from django.views.generic import TemplateView
+from django.shortcuts import redirect
+
+
+def home(request):
+    return redirect('/auth/login/')
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Home
-    path('', TemplateView.as_view(template_name='home/base.html'), name="home"),
+    path('', home, name="home"),
     # Authorization and registration
     path('auth/', include('authorization.urls')),
     # Personal room for register users
@@ -17,7 +22,11 @@ urlpatterns = [
     # Teacher
     path('teacher/', include('teacher.urls')),
     # Ajax, Post, Get requests from form
-    path('api/', include('httpRequest.urls'))
+    path('api/', include('api.urls')),
+
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.authtoken')),
+    path('auth/', include('djoser.urls.jwt')),
 ]
 
 if settings.DEBUG:

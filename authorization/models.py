@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+
 # Docs -> https://tproger.ru/translations/extending-django-user-model/
 class Profile(models.Model):
     """ Custom profile for users"""
@@ -17,7 +18,6 @@ class Profile(models.Model):
         ("teacher", 'Викладач'),
     )
 
-    
     access_profile = models.CharField(max_length=10, blank=True, choices=TYPE_OF_ACCESS)
     birth_date = models.DateField(null=True, blank=True, verbose_name="Дата народження")
 
@@ -32,5 +32,3 @@ class Profile(models.Model):
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
-
-

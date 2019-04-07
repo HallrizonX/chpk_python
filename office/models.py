@@ -1,9 +1,9 @@
 from django.db import models
 from authorization.models import *
-import os
+
 
 class Group(models.Model):
-    number = models.IntegerField(max_length=4, unique=True)
+    number = models.CharField(max_length=4, unique=True)
     slug = models.SlugField(max_length=120)
 
     def __str__(self):
@@ -41,8 +41,8 @@ class Files(models.Model):
 
 class Teacher(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    subjects = models.ManyToManyField(Subject)
-    files = models.ManyToManyField(Files)
+    subjects = models.ManyToManyField(Subject, blank=True)
+    files = models.ManyToManyField(Files, blank=True)
 
     def __str__(self):
         return "{} {} {}".format(self.profile.name, self.profile.surname, self.profile.last_name)
