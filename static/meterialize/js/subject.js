@@ -20,7 +20,14 @@ $(document).ready(function () {
         }).then(function (data) {
             $(".subject-table-body").append(data);
         })
-    })
+    });
+    try{
+         $('.dropdown-trigger').dropdown({
+             'constrainWidth': false,
+         })
+    }catch (e) {
+
+    }
 });
 
 // head time

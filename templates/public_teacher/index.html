@@ -1,31 +1,35 @@
-{% extends 'public_teacher/base.html' %}
+{% extends 'subject/base.html' %}
 {% block content %}
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            {% for teacher in teachers %}
-                <div class="card w-25 col-10 col-sm-6 col-md-4 col-xl-3 ">
-                    <div class="card-body">
-                        <h6 class="card-title"><a href="{{ teacher.get_absolute_url }}">
-                            {{ teacher.profile.surname }} {{ teacher.profile.name }} {{ teacher.profile.last_name }}
-                        </a>
-                        </h6>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <div class="dropdown">
-                            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton{{ teacher.id }}"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Предмети
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ teacher.id }}">
-                                {% for subject in teacher.subjects.all %}
-                                    <a class="dropdown-item" href="{{ subject.get_absolute_url }}">{{ subject.group }}
-                                        : {{ subject.name }}</a>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
+    <div class="col s12">
+        <h3 class="text-white center-align">
+            Список викладачів
+        </h3>
+        <hr>
     </div>
+    <hr>
+    <div class="row">
+        {% for teacher in teachers %}
+            <div class="col s4 offset-s1 card" style="min-height: 100px">
+                <div class="card-body">
+                    <h6 class="card-title"><a href="{{ teacher.get_absolute_url }}">
+                        {{ teacher.profile.surname }} {{ teacher.profile.name }} {{ teacher.profile.last_name }}
+                    </a>
+                    </h6>
+                    <a class='dropdown-trigger btn col s12' href='#' data-target='dropdown{{ teacher.id }}'>Предмети</a>
+                    <ul id='dropdown{{ teacher.id }}' class='dropdown-content'>
+                        {% for subject in teacher.subjects.all %}
+                            <li>
+                                <a class="dropdown-item"
+                                   href="{{ subject.get_absolute_url }}">Група {{ subject.group.number }}
+                                    : {{ subject.name }}</a></li>
+                            <li class="divider" tabindex="-1"></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+
 
 {% endblock content %}

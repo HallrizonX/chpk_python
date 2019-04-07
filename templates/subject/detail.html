@@ -2,49 +2,49 @@
 {% load static %}
 
 {% block content %}
-<diV class="container">
-<div class="row">
-    <div class="col-12">
-        <h1> Предмет - {{ subject.name }}</h1>
-        <h1> Курс - {{ subject.group.number }}</h1>
-        <hr class="my-4">
+    <diV class="container">
         <div class="row">
-            <div class="col-lg-6 col-sm-12">
-                <h4>Опис:</h4>
-                <p style="font-size: 1.4em">
-                    {% lorem %}
-                </p>
-            </div>
-            <div class="col-lg-6 col-sm-12">
-                <div class="jumbotron">
-                    <h4 class="display-6">{{ teacher.profile.surname }} {{ teacher.profile.name }} {{ teacher.profile.last_name }}</h4>
-                    <hr class="my-4">
-                    <a class="btn btn-primary btn-lg" href="#" role="button">Профіль викладача</a>
+            <div class="col-12">
+                <div class="row">
+                    <h3>Група : {{ subject.group.number }} {{ subject.name }} </h3>
+                    <hr>
+                    <div class="col-lg-6 col-sm-12">
+                        <h4>Опис:</h4>
+                        <p style="font-size: 1.4em">
+                            {% lorem %}
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                        <div class="jumbotron">
+                            <hr class="my-4">
+                            <h4 class="display-6">{{ teacher.profile.surname }} {{ teacher.profile.name }} {{ teacher.profile.last_name }}</h4>
+                            <a style="width: 100%" class="btn btn-primary btn-lg" href="{{ teacher.get_absolute_url }}"
+                               role="button">Профіль викладача</a>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <h3 class="text-center">Файли</h3>
+                <hr>
+                <div class="col-lg-7 offset-lg-2  col-sm-10 offset-sm-0">
+                    <table class="table text-center table-bordered table-hover table-info">
+                        <thead>
+                        <tr>
+                            <th scope="col">Файл</th>
+                            <th scope="col">Формат</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for file in files %}
+                            <tr>
+                                <td><a href="{{ file.get_absolute_url }}" download>{{ file.title }}</a></td>
+                                <td>{{ file.file |make_list|slice:"-3:"|join:""|slugify }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-        <hr>
-        <h1 class="text-center">Файли</h1>
-        <hr>
-        <div class="col-lg-7 offset-lg-2  col-sm-10 offset-sm-0">
-            <table class="table text-center table-bordered table-hover table-info">
-                <thead>
-                <tr>
-                    <th scope="col">Файл</th>
-                    <th scope="col">Формат</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for file in files %}
-                    <tr>
-                        <td><a href="{{ file.get_absolute_url }}" download>{{ file.title }}</a></td>
-                        <td>{{ file.file |make_list|slice:"-3:"|join:""|slugify }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-</diV>
+    </diV>
 {% endblock content %}

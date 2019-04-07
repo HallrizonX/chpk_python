@@ -1,0 +1,51 @@
+{% load static %}
+<header>
+
+    <nav class="navbar navbar-expand-lg navbar-light " style="background: rgb(173,167,175);">
+    <a class="navbar-brand center center-align center-block align-content-center align-items-center" href="/"
+           style="border: 2px solid rgba(128,128,128,0.58); padding: 5px; border-radius: 10px; font-weight: 500">
+            <span style="font-size: 1.5em; color: rgba(33,33,33,0.82);">ЧПК</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-header"
+                aria-controls="navbar-header" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar-header">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <ul class="navbar-nav">
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item menu-head">
+                        <a class="nav-link" href="/office/" style="color: black;">Офіс</a>
+                    </li>
+                    <li class="nav-item menu-head">
+                        <a class="nav-link" href="/subject/" style="color: black;">Предмети</a>
+                    </li>
+                    <li class="nav-item menu-head">
+                        <a class="nav-link " href="/teacher/" style="color: black;">Викладачі</a>
+                    </li>
+                {% endif %}
+                </ul>
+
+                {% if request.user.is_authenticated %}
+                    <a class="nav-link" href="/auth/logout/"> <i class="fas fa-sign-out-alt" style="font-size: 2em; color: rgba(17,17,17,0.78);"></i></a>
+                {% else %}
+                    <a class="nav-link" href="/auth/register/">
+
+                        <i class="fas fa-user-edit" style="font-size: 2em; color: white"></i>
+                        </a>
+                    <a class="nav-link" href="/auth/login/">
+                        <i class="far fa-user-circle" style="font-size: 2.2em; color: white"></i>
+                    </a>
+                {% endif %}
+            </form>
+
+        </div>
+    </nav>
+</header>
+
+<script type="text/javascript">
+
+</script>

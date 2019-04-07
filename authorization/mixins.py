@@ -5,16 +5,20 @@ from authorization.utils.DBAudit import DBAudit
 from authorization.utils.UserTools import UserTools
 
 
+
 class AuthMixin:
     """ Class for process authorization users """
     template = ""
 
-    def get(self, request):
 
+    def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('/office/')
         return render(request, self.template, context={})
 
     def post(self, request):
-
+        if request.user.is_authenticated:
+            return redirect('/office/')
         return UserTools.authenticate(request,
                                       username=request.POST['username'],
                                       password=request.POST['password'],
@@ -28,9 +32,13 @@ class RegisterMixin:
     href = "/auth/register/"
 
     def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('/office/')
         return render(request, self.template, context={})
 
     def post(self, request):
+        if request.user.is_authenticated:
+            return redirect('/office/')
         data = request.POST
         if not DBAudit.check_email(data['email']) or not DBAudit.check_username(data['username']):
             return render(request, self.template, context={"msg": "Помилка з логіном або поштою"})
